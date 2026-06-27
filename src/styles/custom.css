@@ -1,0 +1,36 @@
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #10B981;
+  --color-primary-dark: #059669;
+  --color-primary-light: #34D399;
+  --color-background: #F8FAF8;
+  --color-surface: #FFFFFF;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.035) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: #0F172A; /* slate-900 */
+}
+
+/* Custom transitions and utility animations */
+.transition-glass {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism focus rings */
+.focus-glass:focus-within {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
