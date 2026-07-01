@@ -30,7 +30,7 @@ import { AdminDashboard } from "./screens/AdminDashboard";
 
 const Root = () => {
   return (
-    <div className="font-sans text-slate-900 bg-[#F8FAF8] min-h-screen flex flex-col w-full relative overflow-hidden">
+    <div className="font-sans text-slate-900 bg-[#F8FAF8] h-[100dvh] flex flex-col w-full relative overflow-hidden">
       {/* Blurred Campus Illustration Background */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.70] pointer-events-none scale-[1.05]"
