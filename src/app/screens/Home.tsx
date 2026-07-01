@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car } from "lucide-react";
+import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car, Trophy, Users } from "lucide-react";
 import { useApp } from "../context/AppContext";
 
 export function Home() {
@@ -12,7 +12,6 @@ export function Home() {
     (t.status === "CLAIMED" || t.status === "SUBMITTED" || t.status === "FLAGGED")
   );
 
-  const unreadCount = notifications.filter(n => n.unread).length;
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
 
@@ -43,26 +42,18 @@ export function Home() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="relative cursor-pointer w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center" onClick={() => navigate("/app/notifications")}>
-            <Bell size={20} className="text-slate-700" strokeWidth={2} />
-            {unreadCount > 0 && (
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
-            )}
-          </div>
-        </div>
       </header>
 
       <div className="px-6 space-y-8 pb-32">
 
         {/* Verification Banner */}
         {user.verificationStatus === "UNVERIFIED" && (
-          <div onClick={() => navigate("/app/verification")} className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-100 rounded-2xl cursor-pointer">
+          <div onClick={() => navigate("/app/verification")} className="flex items-center justify-between p-4 bg-emerald-300 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] rounded-[16px] cursor-pointer hover:-translate-y-0.5 transition-all">
             <div className="flex items-center gap-3">
-              <AlertCircle size={18} className="text-emerald-600" strokeWidth={2.5} />
-              <span className="text-sm font-semibold text-emerald-900">Verify College ID to earn</span>
+              <AlertCircle size={20} className="text-slate-900" strokeWidth={2.5} />
+              <span className="text-sm font-black text-slate-900 uppercase tracking-tight">Verify College ID to earn</span>
             </div>
-            <ArrowRight size={16} className="text-emerald-600" />
+            <ArrowRight size={20} className="text-slate-900" strokeWidth={2.5} />
           </div>
         )}
 
@@ -100,44 +91,42 @@ export function Home() {
           <div className="absolute -right-8 -bottom-8 w-48 h-48 bg-emerald-400 rounded-full blur-3xl pointer-events-none opacity-50" />
         </motion.div>
 
-        {/* Quick Nav - Glassmorphism */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Quick Nav - Brutalist Accent */}
+        <div className="grid grid-cols-3 gap-3">
           <div
             onClick={() => navigate("/app/tasks")}
-            className="flex flex-col gap-3 p-5 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-0.5"
-            style={{
-              background: "rgba(255,255,255,0.6)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              border: "1px solid rgba(255,255,255,0.9)",
-              boxShadow: "0 4px 24px rgba(16,185,129,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
-            }}
+            className="bg-[#fef08a] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
           >
-            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm group-hover:text-emerald-600 transition-colors" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(255,255,255,0.9)" }}>
-              <Search size={20} strokeWidth={2} />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-yellow-100 transition-colors">
+              <Search size={16} className="text-slate-900" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">Browse</h4>
-              <p className="text-xs text-slate-500 font-medium mt-0.5">Find tasks to earn</p>
+              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Browse</h4>
+              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">Find tasks</p>
             </div>
           </div>
           <div
             onClick={() => navigate("/app/wallet")}
-            className="flex flex-col gap-3 p-5 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-0.5"
-            style={{
-              background: "rgba(255,255,255,0.6)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              border: "1px solid rgba(255,255,255,0.9)",
-              boxShadow: "0 4px 24px rgba(16,185,129,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
-            }}
+            className="bg-[#c7d2fe] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
           >
-            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm group-hover:text-emerald-600 transition-colors" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(255,255,255,0.9)" }}>
-              <Wallet size={20} strokeWidth={2} />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-indigo-100 transition-colors">
+              <Wallet size={16} className="text-slate-900" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">Wallet</h4>
-              <p className="text-xs text-slate-500 font-medium mt-0.5">{user.cernBalance} $CERN</p>
+              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Wallet</h4>
+              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">{user.cernBalance} CERN</p>
+            </div>
+          </div>
+          <div
+            onClick={() => navigate("/app/community")}
+            className="bg-[#fecdd3] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
+          >
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-rose-100 transition-colors">
+              <Users size={16} className="text-slate-900" strokeWidth={2.5} />
+            </div>
+            <div>
+              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Social</h4>
+              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">Connect</p>
             </div>
           </div>
         </div>
@@ -145,7 +134,7 @@ export function Home() {
         {/* Explore Categories - Interactive Horizontal Scroll */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-slate-900">Explore</h3>
+            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Explore</h3>
           </div>
           <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-6 px-6 pb-2">
             {categories.map((cat, idx) => {
@@ -175,38 +164,31 @@ export function Home() {
           </div>
         </section>
 
-        {/* Weekly Stats - Glassmorphism */}
+        {/* Weekly Stats - Brutalist Accent */}
         <motion.div
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           onClick={() => navigate("/app/wallet")}
-          className="rounded-[24px] p-5 flex items-center justify-between cursor-pointer transition-all group hover:-translate-y-0.5"
-          style={{
-            background: "rgba(255,255,255,0.55)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255,255,255,0.95)",
-            boxShadow: "0 8px 32px rgba(16,185,129,0.10), 0 1px 0 rgba(255,255,255,0.9) inset",
-          }}
+          className="bg-white rounded-[24px] p-5 flex items-center justify-between cursor-pointer transition-all group hover:-translate-y-1 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a]"
         >
           <div>
-            <h4 className="text-sm font-bold text-slate-500 mb-1">Earned this week</h4>
+            <h4 className="text-sm font-black text-slate-900 uppercase tracking-tight mb-1">Earned this week</h4>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-slate-900">450 <span className="text-base text-emerald-600">$CERN</span></span>
-              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-0.5">
-                <TrendingUp size={10} strokeWidth={3} /> +12%
+              <span className="text-3xl font-black text-slate-900 tracking-tighter">450 <span className="text-lg text-emerald-600">$CERN</span></span>
+              <span className="text-[11px] font-black text-slate-900 bg-[#fef08a] border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] px-2.5 py-0.5 rounded-full flex items-center gap-0.5 uppercase">
+                <TrendingUp size={12} strokeWidth={3} /> +12%
               </span>
             </div>
           </div>
-          <div className="w-12 h-12 rounded-full flex items-center justify-center group-hover:bg-emerald-50 transition-colors" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(255,255,255,0.9)" }}>
-            <Wallet size={20} className="text-slate-400 group-hover:text-emerald-600 transition-colors" strokeWidth={2.5} />
+          <div className="w-14 h-14 rounded-full flex items-center justify-center bg-emerald-300 border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] group-hover:bg-emerald-400 transition-colors">
+            <Wallet size={24} className="text-slate-900" strokeWidth={2.5} />
           </div>
         </motion.div>
 
         {/* Active Tasks - Minimal clean cards inspired by image 3 */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-slate-900">Your Plan</h3>
+            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Your Plan</h3>
             <span className="text-sm font-semibold text-emerald-600 cursor-pointer" onClick={() => navigate("/app/my-tasks")}>See all</span>
           </div>
 
@@ -259,12 +241,57 @@ export function Home() {
           )}
         </section>
 
+        {/* Mini Leaderboard */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Top Performers</h3>
+              <Trophy size={20} className="text-yellow-500" />
+            </div>
+            <span
+              className="text-sm font-semibold text-emerald-600 cursor-pointer hover:text-emerald-700 transition-colors"
+              onClick={() => navigate("/app/leaderboard")}
+            >
+              Full Rankings
+            </span>
+          </div>
+
+          <div 
+            onClick={() => navigate("/app/leaderboard")}
+            className="flex flex-col gap-0 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-0.5 overflow-hidden"
+            style={{
+              background: "rgba(255,255,255,0.6)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              border: "1px solid rgba(255,255,255,0.9)",
+              boxShadow: "0 4px 24px rgba(16,185,129,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
+            }}
+          >
+            {[
+              { rank: 1, name: "Sarah M.", score: "4,200 pts", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" },
+              { rank: 2, name: "Alex R.", score: "3,850 pts", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" },
+              { rank: 3, name: "David K.", score: "3,100 pts", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" },
+            ].map((user, idx) => (
+              <div key={user.rank} className={`flex items-center justify-between p-4 ${idx !== 2 ? 'border-b border-white/60' : ''} group-hover:bg-white/40 transition-colors`}>
+                <div className="flex items-center gap-3">
+                  <div className={`w-7 h-7 flex items-center justify-center rounded-full text-[11px] font-black shadow-sm ${user.rank === 1 ? 'bg-gradient-to-br from-yellow-200 to-yellow-400 text-yellow-900 border border-yellow-300' : user.rank === 2 ? 'bg-gradient-to-br from-slate-200 to-slate-300 text-slate-800 border border-slate-300' : 'bg-gradient-to-br from-orange-200 to-orange-300 text-orange-900 border border-orange-300'}`}>
+                    #{user.rank}
+                  </div>
+                  <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-full object-cover shadow-sm border-[1.5px] border-white/90" />
+                  <span className="font-bold text-sm text-slate-800">{user.name}</span>
+                </div>
+                <span className="text-xs font-black text-emerald-700 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-200/60 shadow-sm">{user.score}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Campus Activity - Enhanced */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <h3 className="text-lg font-bold text-slate-900">Recent Activity</h3>
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Recent Activity</h3>
+              <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-900 bg-emerald-400 animate-pulse" />
             </div>
             <span
               className="text-sm font-semibold text-slate-400 hover:text-emerald-600 cursor-pointer transition-colors"

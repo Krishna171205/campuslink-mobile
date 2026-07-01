@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { ArrowLeft, Clock, MapPin, Share2, ShieldCheck, Users, Star, MessageSquare, AlertTriangle, CheckCircle, FileCheck, HelpCircle } from "lucide-react";
+import { ArrowLeft, Clock, MapPin, Share2, ShieldCheck, Users, Star, MessageSquare, AlertTriangle, CheckCircle, FileCheck, HelpCircle, Edit2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
@@ -73,7 +73,6 @@ export function TaskDetail() {
 
   return (
     <div className="flex flex-col min-h-full bg-white relative overflow-y-auto no-scrollbar pb-32 selection:bg-emerald-500 selection:text-white">
-      {/* Header - Minimal System */}
       <header className="px-6 pt-12 pb-4 bg-white/90 backdrop-blur-xl sticky top-0 z-20 flex items-center justify-between">
         <button
           onClick={() => navigate(-1)}
@@ -81,12 +80,22 @@ export function TaskDetail() {
         >
           <ArrowLeft size={20} strokeWidth={2.5} />
         </button>
-        <button
-          onClick={() => alert("Task link copied! Share with your classmates.")}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors"
-        >
-          <Share2 size={18} strokeWidth={2.5} />
-        </button>
+        <div className="flex gap-2">
+          {isPoster && task.status === "OPEN" && (
+            <button
+              onClick={() => navigate(`/app/tasks/${taskId}/edit`)}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors"
+            >
+              <Edit2 size={18} strokeWidth={2.5} />
+            </button>
+          )}
+          <button
+            onClick={() => alert("Task link copied! Share with your classmates.")}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors"
+          >
+            <Share2 size={18} strokeWidth={2.5} />
+          </button>
+        </div>
       </header>
 
       <div className="p-6 space-y-8">
