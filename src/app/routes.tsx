@@ -30,21 +30,23 @@ import { AdminDashboard } from "./screens/AdminDashboard";
 
 const Root = () => {
   return (
-    <div className="font-sans text-slate-900 bg-[#F8FAF8] h-[100dvh] flex flex-col w-full relative overflow-hidden">
-      {/* Blurred Campus Illustration Background */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.70] pointer-events-none scale-[1.05]"
-      />
-      {/* Subtle grid pattern to provide structure for backdrop blur glassmorphism */}
-      <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none z-0"
-        style={{
-          backgroundImage: 'radial-gradient(#0F172A 1.5px, transparent 1.5px)',
-          backgroundSize: '24px 24px'
-        }}
-      />
-      <div className="flex-1 flex flex-col w-full mx-auto relative overflow-hidden z-10 lg:max-w-7xl">
-        <Outlet />
+    <div className="font-sans text-slate-900 bg-[#E2E8F0] min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-md h-[100dvh] md:h-[90vh] md:rounded-[40px] overflow-hidden bg-[#F8FAF8] relative shadow-2xl flex flex-col md:border-[8px] border-slate-900 ring-1 ring-white/10">
+        {/* Blurred Campus Illustration Background */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.70] pointer-events-none scale-[1.05]"
+        />
+        {/* Subtle grid pattern to provide structure for backdrop blur glassmorphism */}
+        <div
+          className="absolute inset-0 opacity-[0.035] pointer-events-none z-0"
+          style={{
+            backgroundImage: 'radial-gradient(#0F172A 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px'
+          }}
+        />
+        <div className="flex-1 flex flex-col relative overflow-hidden z-10">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

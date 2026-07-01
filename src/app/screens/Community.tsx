@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { Users, Search, Hash, MessageCircle, Flame, ArrowLeft } from "lucide-react";
+import { Users, Search, Hash, MessageCircle, Flame } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 
@@ -22,12 +22,7 @@ export function Community() {
     <div className="flex flex-col h-full bg-[#E2E8F0]/30 absolute inset-0 z-50 overflow-hidden">
       {/* Header */}
       <header className="px-6 pt-12 pb-4 bg-white/80 border-b border-slate-200/50 shadow-sm backdrop-blur-md flex items-center justify-between sticky top-0 z-10">
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors border border-slate-200 shadow-sm cursor-pointer">
-            <ArrowLeft size={18} strokeWidth={2.5} />
-          </button>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Community</h1>
-        </div>
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Community</h1>
         <div className="flex gap-2">
           <button className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 shadow-sm hover:bg-slate-100 transition-colors">
             <Search size={18} strokeWidth={2.5} />

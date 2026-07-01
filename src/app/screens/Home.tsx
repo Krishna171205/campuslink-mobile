@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car, Trophy, Users } from "lucide-react";
+import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car, Trophy } from "lucide-react";
 import { useApp } from "../context/AppContext";
 
 export function Home() {
@@ -92,41 +92,29 @@ export function Home() {
         </motion.div>
 
         {/* Quick Nav - Brutalist Accent */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <div
             onClick={() => navigate("/app/tasks")}
-            className="bg-[#fef08a] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
+            className="bg-[#fef08a] flex flex-col gap-3 p-5 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
           >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-yellow-100 transition-colors">
-              <Search size={16} className="text-slate-900" strokeWidth={2.5} />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-yellow-100 transition-colors">
+              <Search size={20} className="text-slate-900" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Browse</h4>
-              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">Find tasks</p>
+              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight">Browse</h4>
+              <p className="text-xs text-slate-800 font-bold mt-0.5">Find tasks to earn</p>
             </div>
           </div>
           <div
             onClick={() => navigate("/app/wallet")}
-            className="bg-[#c7d2fe] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
+            className="bg-[#c7d2fe] flex flex-col gap-3 p-5 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
           >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-indigo-100 transition-colors">
-              <Wallet size={16} className="text-slate-900" strokeWidth={2.5} />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-indigo-100 transition-colors">
+              <Wallet size={20} className="text-slate-900" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Wallet</h4>
-              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">{user.cernBalance} CERN</p>
-            </div>
-          </div>
-          <div
-            onClick={() => navigate("/app/community")}
-            className="bg-[#fecdd3] flex flex-col gap-3 p-4 rounded-[20px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
-          >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-rose-100 transition-colors">
-              <Users size={16} className="text-slate-900" strokeWidth={2.5} />
-            </div>
-            <div>
-              <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Social</h4>
-              <p className="text-[10px] text-slate-800 font-bold mt-0.5 leading-tight">Connect</p>
+              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight">Wallet</h4>
+              <p className="text-xs text-slate-800 font-bold mt-0.5">{user.cernBalance} $CERN</p>
             </div>
           </div>
         </div>
