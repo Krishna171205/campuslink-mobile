@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car, Trophy } from "lucide-react";
+import { Bell, Search, Plus, ArrowRight, Wallet, ClipboardList, AlertCircle, Calendar, TrendingUp, Tag, Coffee, Laptop, Car, Trophy, Users } from "lucide-react";
 import { useApp } from "../context/AppContext";
 
 export function Home() {
@@ -106,15 +106,15 @@ export function Home() {
             </div>
           </div>
           <div
-            onClick={() => navigate("/app/wallet")}
+            onClick={() => navigate("/app/community")}
             className="bg-[#c7d2fe] flex flex-col gap-3 p-5 rounded-[24px] cursor-pointer group transition-all hover:-translate-y-1 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"
           >
             <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] group-hover:bg-indigo-100 transition-colors">
-              <Wallet size={20} className="text-slate-900" strokeWidth={2.5} />
+              <Users size={20} className="text-slate-900" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight">Wallet</h4>
-              <p className="text-xs text-slate-800 font-bold mt-0.5">{user.cernBalance} $CERN</p>
+              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight">Community</h4>
+              <p className="text-xs text-slate-800 font-bold mt-0.5">Join discussions</p>
             </div>
           </div>
         </div>

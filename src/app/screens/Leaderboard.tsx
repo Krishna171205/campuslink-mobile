@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Trophy, ChevronUp, ChevronDown, Sparkles, Medal, Award, Flame, UserCheck } from "lucide-react";
+import { useNavigate } from "react-router";
+import { Trophy, ChevronUp, ChevronDown, Sparkles, Medal, Award, Flame, UserCheck, ArrowLeft } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useApp } from "../context/AppContext";
 
 export function Leaderboard() {
+  const navigate = useNavigate();
   const { user } = useApp();
   const [activeTab, setActiveTab] = useState<"reputation" | "cern" | "tasks">("reputation");
   const [period, setPeriod] = useState("This Month");
@@ -50,12 +52,17 @@ export function Leaderboard() {
       {/* Header */}
       <header className="px-6 pt-12 pb-4 bg-[#F8FAF8]/90 backdrop-blur-md sticky top-0 z-20 border-b border-slate-200/50">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2 uppercase">
-            Leaderboard 
-            <span className="bg-emerald-500 border border-emerald-600/30 p-1.5 rounded-lg inline-flex items-center justify-center text-white">
-              <Trophy size={16} />
-            </span>
-          </h1>
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate(-1)} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors shadow-sm shrink-0">
+              <ArrowLeft size={18} strokeWidth={2.5} />
+            </button>
+            <h1 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2 uppercase">
+              Leaderboard 
+              <span className="bg-emerald-500 border border-emerald-600/30 p-1.5 rounded-lg inline-flex items-center justify-center text-white">
+                <Trophy size={16} />
+              </span>
+            </h1>
+          </div>
           
           {/* Time Picker Dropdown */}
           <select 
