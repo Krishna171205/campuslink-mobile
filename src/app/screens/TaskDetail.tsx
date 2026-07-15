@@ -12,21 +12,21 @@ export function TaskDetail() {
 
   const task = tasks.find(t => t.id === taskId);
   const [rejectedApplicants, setRejectedApplicants] = useState<string[]>([]);
+  
+  // If task is completed or flagged, redirect to the completed page
+  if (task && (task.status === "COMPLETED" || task.status === "FLAGGED")) {
+    navigate(`/app/tasks/${task.id}/completed`, { replace: true });
+  }
 
   // Sheet states
   const [showApplySheet, setShowApplySheet] = useState(false);
   const [showSubmitSheet, setShowSubmitSheet] = useState(false);
-  const [showReviewSheet, setShowReviewSheet] = useState(false);
   const [showActiveRestrictionModal, setShowActiveRestrictionModal] = useState(false);
 
   // Submit form state
   const [submitComment, setSubmitComment] = useState("");
   const [submitFiles, setSubmitFiles] = useState<string[]>([]);
   const [submitLink, setSubmitLink] = useState("");
-
-  // Review form state
-  const [rating, setRating] = useState(0);
-  const [reviewComment, setReviewComment] = useState("");
 
   if (!task) {
     return (
@@ -58,13 +58,6 @@ export function TaskDetail() {
     if (!submitComment.trim()) return;
     submitTaskWork(taskId, submitComment, submitFiles.length > 0 ? submitFiles : ["deliverable_v2_mockup.fig"], submitLink);
     setShowSubmitSheet(false);
-  };
-
-  const handleReviewSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (rating === 0) return;
-    reviewTask(taskId, rating, reviewComment);
-    setShowReviewSheet(false);
   };
 
   const startChatSim = () => {
@@ -289,39 +282,6 @@ export function TaskDetail() {
             </div>
           </div>
         )}
-
-        {/* Rating feedback display (Once completed) */}
-        {task.review && (
-          <div className="space-y-3 pt-4 border-t border-slate-100">
-            <h3 className="text-sm text-slate-900 font-black flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-emerald-400 rounded-full"></span>
-              Review Feedback
-            </h3>
-            <div className="bg-slate-50 border border-slate-100 rounded-[28px] p-6 space-y-3 ml-3.5">
-              <div className="flex justify-between items-center mb-2">
-                <div className="flex gap-1 text-yellow-500">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className={i < (task.review?.rating || 0) ? "fill-yellow-400" : "text-slate-200"}
-                    />
-                  ))}
-                </div>
-                <span className="text-[11px] font-bold text-slate-400">{task.review.reviewedAt}</span>
-              </div>
-              <p className="text-sm font-medium text-slate-700 leading-relaxed italic">
-                "{task.review.comment || 'Helper did an excellent job!'}"
-              </p>
-              {task.review.flagged && (
-                <div className="text-xs font-bold text-red-600 bg-red-50 border border-red-100 p-4 rounded-2xl flex items-center gap-2 mt-4">
-                  <AlertTriangle size={18} />
-                  <span>Held in Admin Queue for Dispute resolution</span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* The "Conversion" Zone: 30% Neo-Brutalism */}
@@ -370,7 +330,7 @@ export function TaskDetail() {
 
         {isPoster && task.status === "SUBMITTED" && (
           <button
-            onClick={() => setShowReviewSheet(true)}
+            onClick={() => navigate(`/app/tasks/${taskId}/review`)}
             className="w-full bg-[#10b981] border-2 border-slate-900 py-4 shadow-[5px_5px_0px_0px_#0f172a] text-white text-base font-black uppercase tracking-wider active:translate-y-1 active:translate-x-1 active:shadow-[0px_0px_0px_0px_#0f172a] transition-all"
           >
             Review Helper
@@ -538,104 +498,6 @@ export function TaskDetail() {
                     className="flex-1 bg-[#10b981] hover:bg-emerald-500 text-white py-4 text-sm font-bold rounded-2xl shadow-sm transition-colors"
                   >
                     Submit Work
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </>
-        )}
-
-        {/* Review Sheet */}
-        {showReviewSheet && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowReviewSheet(false)}
-              className="absolute inset-0 bg-slate-900 z-40"
-            />
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="absolute bottom-0 left-0 right-0 bg-white rounded-t-[32px] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] z-50 p-6 space-y-5 pb-10"
-            >
-              <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto" />
-              <div>
-                <h3 className="text-2xl font-black text-slate-900 tracking-tight">Review Helper</h3>
-              </div>
-
-              <form onSubmit={handleReviewSubmit} className="space-y-4">
-                {/* Rating stars picker */}
-                <div className="flex justify-center gap-3 py-6">
-                  {[1, 2, 3, 4, 5].map(star => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setRating(star)}
-                      className="cursor-pointer transition-transform duration-150 active:scale-90"
-                    >
-                      <Star
-                        size={44}
-                        className={star <= rating ? "fill-yellow-400 text-yellow-500" : "text-slate-200"}
-                      />
-                    </button>
-                  ))}
-                </div>
-
-                {/* Rating labels */}
-                {rating > 0 && (
-                  <p className="text-center font-bold text-sm text-slate-500 leading-none">
-                    {rating === 1 ? "Terrible" :
-                      rating === 2 ? "Poor" :
-                        rating === 3 ? "Average" :
-                          rating === 4 ? "Good" :
-                            "Excellent"}
-                  </p>
-                )}
-
-                {/* Low Rating Warning Banner */}
-                {rating > 0 && rating <= 2 && (
-                  <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-2xl text-xs font-medium text-yellow-800 flex gap-3 items-start">
-                    <AlertTriangle size={20} className="shrink-0 text-yellow-600 mt-0.5" />
-                    <p className="leading-relaxed">
-                      <strong className="block mb-1 font-bold">Low Rating Warning</strong>
-                      Selecting 1 or 2 stars will automatically lock the payment and report the task for administrator audit review.
-                    </p>
-                  </div>
-                )}
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-500 mb-2">Review Comments</label>
-                  <textarea
-                    placeholder="Provide detailed feedback on code quality, design fidelity, or tutor help..."
-                    value={reviewComment}
-                    onChange={(e) => setReviewComment(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm resize-none focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all min-h-[100px]"
-                  />
-                </div>
-
-                <div className="flex gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowReviewSheet(false)}
-                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-4 text-sm font-bold rounded-2xl transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={rating === 0}
-                    className={`flex-1 py-4 text-sm font-bold rounded-2xl transition-all ${rating === 0
-                      ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                      : rating <= 2
-                        ? "bg-slate-900 text-white shadow-md"
-                        : "bg-[#10b981] hover:bg-emerald-500 text-white shadow-md"
-                      }`}
-                  >
-                    {rating === 0 ? "Select Rating" : rating <= 2 ? "Submit & Flag" : "Submit & Release"}
                   </button>
                 </div>
               </form>

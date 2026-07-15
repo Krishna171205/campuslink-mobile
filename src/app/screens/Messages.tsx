@@ -39,7 +39,8 @@ export function Messages() {
             placeholder="Search classmate chats..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full input-neo-glass py-3.5 pl-12 pr-4 text-xs"
+            className="w-full input-neo-glass py-3.5 pr-4 text-xs"
+            style={{ paddingLeft: '44px' }}
           />
         </div>
       </header>

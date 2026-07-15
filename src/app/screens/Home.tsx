@@ -23,7 +23,7 @@ export function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-full relative selection:bg-emerald-500 selection:text-white" style={{ background: "linear-gradient(160deg, #f0fdf4 0%, #f8fafc 40%, #ecfdf5 100%)" }}>
+    <div className="flex flex-col min-h-full bg-transparent relative selection:bg-emerald-500 selection:text-white">
 
       {/* Minimal Header */}
       <header className="px-6 pt-12 pb-8 sticky top-0 z-30 bg-white/80 backdrop-blur-xl flex items-center justify-between">
@@ -190,7 +190,13 @@ export function Home() {
               {activeTasks.map(task => (
                 <div
                   key={task.id}
-                  onClick={() => navigate(`/app/tasks/${task.id}`)}
+                  onClick={() => {
+                    if (task.status === "COMPLETED" || task.status === "FLAGGED") {
+                      navigate(`/app/tasks/${task.id}/completed`);
+                    } else {
+                      navigate(`/app/tasks/${task.id}`);
+                    }
+                  }}
                   className="min-w-[220px] max-w-[220px] rounded-[24px] p-5 flex flex-col justify-between h-44 cursor-pointer transition-all hover:-translate-y-1"
                   style={{
                     background: "linear-gradient(135deg, rgba(209,250,229,0.7) 0%, rgba(255,255,255,0.5) 100%)",

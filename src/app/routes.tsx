@@ -12,6 +12,8 @@ import { Tasks } from "./screens/Tasks";
 import { MyTasks } from "./screens/MyTasks";
 import { TaskDetail } from "./screens/TaskDetail";
 import { TaskCompletion } from "./screens/TaskCompletion";
+import { TaskReview } from "./screens/TaskReview";
+import { TaskCompleted } from "./screens/TaskCompleted";
 import { CreateTask } from "./screens/CreateTask";
 import { EditTask } from "./screens/EditTask";
 import { Leaderboard } from "./screens/Leaderboard";
@@ -79,6 +81,8 @@ export const router = createBrowserRouter([
       { path: "app/tasks/:id", Component: TaskDetail },
       { path: "app/tasks/:id/edit", Component: EditTask },
       { path: "app/tasks/:id/complete", Component: TaskCompletion },
+      { path: "app/tasks/:id/review", Component: TaskReview },
+      { path: "app/tasks/:id/completed", Component: TaskCompleted },
       { path: "app/notifications", Component: Notifications },
       { path: "app/wallet", Component: Wallet },
       { path: "app/messages", Component: Messages },

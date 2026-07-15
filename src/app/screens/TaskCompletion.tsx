@@ -27,9 +27,9 @@ export function TaskCompletion() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!comment.trim()) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate slight network delay for better UX feel
     setTimeout(() => {
       submitTaskWork(task.id, comment, ["deliverable_v1_final.zip"], link);
@@ -42,7 +42,7 @@ export function TaskCompletion() {
     <div className="flex flex-col min-h-full bg-transparent relative overflow-y-auto pb-32">
       {/* Header */}
       <header className="px-6 pt-12 pb-4 sticky top-0 z-20 flex items-center justify-between border-b border-slate-200/50 bg-[#F8FAF8]/90 backdrop-blur-md">
-        <button 
+        <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 active:scale-95 cursor-pointer transition-all shadow-sm"
         >
@@ -56,7 +56,7 @@ export function TaskCompletion() {
       </header>
 
       <div className="p-6 space-y-8">
-        
+
         {/* Task Context Card */}
         <div className="bg-white border-2 border-slate-900 rounded-[20px] p-5 space-y-3 shadow-[3px_3px_0px_rgba(15,23,42,1)]">
           <div className="flex justify-between items-start gap-4">
@@ -132,11 +132,10 @@ export function TaskCompletion() {
         <button
           onClick={handleSubmit}
           disabled={!comment.trim() || isSubmitting}
-          className={`w-full py-4 text-sm font-black uppercase tracking-wider rounded-[18px] flex items-center justify-center gap-2 transition-all ${
-            !comment.trim() || isSubmitting
-              ? "bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed"
-              : "bg-emerald-500 hover:bg-emerald-600 text-white shadow-[0_4px_12px_rgba(16,185,129,0.3)] cursor-pointer"
-          }`}
+          className={`w-full py-4 text-sm font-bold text-white uppercase tracking-wider rounded-[18px] flex items-center justify-center gap-2 transition-all ${!comment.trim() || isSubmitting
+            ? "bg-slate-200 text-slate-400 border-2 border-slate-300 shadow-none cursor-not-allowed"
+            : "bg-[#10b981] text-slate-900 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#0f172a] active:translate-y-0 active:shadow-none cursor-pointer"
+            }`}
         >
           {isSubmitting ? (
             <motion.div
@@ -146,7 +145,7 @@ export function TaskCompletion() {
             />
           ) : (
             <>
-              <CheckCircle2 size={18} strokeWidth={2.5} />
+              <CheckCircle2 size={18} strokeWidth={1.5} />
               Submit Work for Review
             </>
           )}

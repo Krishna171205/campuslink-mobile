@@ -292,12 +292,13 @@ export function Tasks() {
               onClick={() => setReportingTask(null)}
               className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm z-50"
             />
-            <div className="absolute inset-0 z-50 flex items-center justify-center p-5 pointer-events-none">
+            <div className="absolute inset-0 z-50 flex items-start justify-center pointer-events-none">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: -20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                className="bg-white/70 backdrop-blur-2xl w-full max-w-sm rounded-[32px] p-6 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] pointer-events-auto border border-white/60 flex flex-col gap-6"
+                initial={{ opacity: 0, y: "-100%" }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: "-100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="bg-white/70 backdrop-blur-2xl w-full h-[75vh] rounded-b-[32px] pt-14 px-6 pb-6 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] pointer-events-auto border-b border-white/60 flex flex-col gap-6 overflow-y-auto"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between">

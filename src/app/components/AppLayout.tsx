@@ -19,7 +19,12 @@ export function AppLayout() {
 
   const [showSimPanel, setShowSimPanel] = useState(false);
 
-  const activeIndex = NAV_ITEMS.findIndex(item => location.pathname.startsWith(item.path));
+  const isItemActive = (path: string, id: string) => {
+    if (location.pathname === "/app" && id === "home") return true;
+    return location.pathname.startsWith(path);
+  };
+
+  const activeIndex = NAV_ITEMS.findIndex(item => isItemActive(item.path, item.id));
   const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
   const cycleVerification = () => {
@@ -162,7 +167,7 @@ export function AppLayout() {
           />
 
           {NAV_ITEMS.map((item, index) => {
-            const isActive = location.pathname.startsWith(item.path);
+            const isActive = isItemActive(item.path, item.id);
             const Icon = item.icon;
 
             return (

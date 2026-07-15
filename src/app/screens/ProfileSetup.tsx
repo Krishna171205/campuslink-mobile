@@ -82,7 +82,16 @@ export function ProfileSetup() {
             />
           ))}
         </div>
-        <div className="w-10 h-10" />
+        {step >= 3 ? (
+          <button
+            onClick={step === 4 ? handleFinish : nextStep}
+            className="text-xs font-black text-slate-500 uppercase tracking-widest hover:text-slate-900 transition-colors"
+          >
+            Skip
+          </button>
+        ) : (
+          <div className="w-10 h-10" />
+        )}
       </div>
 
       {/* Main Content */}
